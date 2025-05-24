@@ -1,0 +1,7 @@
+streamlit
+openai
+langchain
+chromadb
+PyMuPDF
+tiktoken
+reportlab

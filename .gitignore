@@ -1,0 +1,7 @@
+__pycache__/
+*.pyc
+.env
+*.db
+vector_store/
+pdf_files/
+config.py  # prevent future secrets exposure
