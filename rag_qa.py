@@ -10,7 +10,12 @@ from dotenv import load_dotenv
 from config import OPENAI_API_KEY
 import config
 import openai
-os.environ['OPENAI_API_KEY'] = os.getenv('OPENAI_API_KEY')
+api_key = os.getenv('OPENAI_API_KEY')
+if api_key:
+    os.environ['OPENAI_API_KEY'] = api_key
+else:
+    raise ValueError("OPENAI_API_KEY not found in environment. Please set it in Streamlit secrets.")
+
 # %%
 persitent_directory = "vector_store"
 pdf_directory = "pdf_files"
