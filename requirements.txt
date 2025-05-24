@@ -7,3 +7,5 @@ PyMuPDF
 tiktoken
 reportlab
 langchain_text_splitters
+langchain-openai
+
