@@ -7,5 +7,6 @@ PyMuPDF
 tiktoken
 reportlab
 langchain_text_splitters
+pypdf
 langchain-openai
-
+protobuf==3.20.*

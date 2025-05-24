@@ -15,7 +15,7 @@ def get_sql_agent(db_uri: str):
 
     db=SQLDatabase.from_uri(db_uri)
     toolkit = SQLDatabaseToolkit(db=db, llm=ChatOpenAI(temperature=0))
-    agent = create_sql_agent(llm=ChatOpenAI(temperature=0), toolkit=toolkit, verbose=True)
+    agent = create_sql_agent(llm=ChatOpenAI(temperature=0), toolkit=toolkit, verbose=True,handle_parsing_errors=True)
     return agent
 
 # %%
