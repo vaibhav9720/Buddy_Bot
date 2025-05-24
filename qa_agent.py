@@ -1,8 +1,8 @@
 # %%
-from langchain.agents import create_sql_agent
-from langchain.agents.agent_toolkits import SQLDatabaseToolkit
-from langchain.sql_database import SQLDatabase
-from langchain.chat_models import ChatOpenAI
+from langchain_community.agent_toolkits.sql.base import create_sql_agent
+from langchain_community.agent_toolkits.sql.toolkit import SQLDatabaseToolkit
+from langchain_community.utilities import SQLDatabase
+from langchain_openai import ChatOpenAI
 
 
 # %%

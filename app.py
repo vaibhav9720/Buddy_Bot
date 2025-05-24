@@ -1,12 +1,12 @@
 # %%
 import os
 import streamlit as st
-from langchain.document_loaders import PyPDFLoader
-from langchain.text_splitter import CharacterTextSplitter
-from langchain.vectorstores import Chroma
-from langchain.embeddings import OpenAIEmbeddings
+from langchain_community.document_loaders import PyPDFLoader
+from langchain_text_splitters import CharacterTextSplitter
+from langchain_community.vectorstores import Chroma
+from langchain_community.embeddings import OpenAIEmbeddings
 from langchain.chains import RetrievalQA
-from langchain.chat_models import ChatOpenAI
+from langchain_openai import ChatOpenAI
 from rag_qa import process_all_pdfs, load_vector_store, get_qa_chain
 from qa_agent import get_sql_agent
 from rag_qa import get_qa_chain

@@ -1,7 +1,9 @@
 streamlit
 openai
 langchain
+langchain_community
 chromadb
 PyMuPDF
 tiktoken
 reportlab
+langchain_text_splitters
