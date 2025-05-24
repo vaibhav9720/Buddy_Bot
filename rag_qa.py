@@ -6,10 +6,12 @@ from langchain_community.embeddings import OpenAIEmbeddings
 from langchain_community.vectorstores import Chroma
 from langchain.chains import RetrievalQA
 from langchain_community.chat_models import ChatOpenAI
+from langchain_community.vectorstores import FAISS
 from dotenv import load_dotenv
 from config import OPENAI_API_KEY
 import config
 import openai
+faiss_index = None 
 api_key = os.getenv('OPENAI_API_KEY')
 if api_key:
     os.environ['OPENAI_API_KEY'] = api_key
@@ -22,6 +24,7 @@ pdf_directory = "pdf_files"
 
 # %%
 def process_all_pdfs():
+    global faiss_index
     pdf_files = [f for f in os.listdir(pdf_directory) if f.endswith('.pdf')]
     all_chunks=[]
     
@@ -38,22 +41,25 @@ def process_all_pdfs():
             for chunk in chunks:
                 chunk.metadata["source"] = docs[0].metadata["source"]
             all_chunks.extend(chunks)
-    vectordb=Chroma.from_documents(
-        documents=all_chunks,
-        embedding=OpenAIEmbeddings(),
-        persist_directory=persitent_directory
-    )
-    vectordb.persist()
+    # vectordb=Chroma.from_documents(
+    #     documents=all_chunks,
+    #     embedding=OpenAIEmbeddings(),
+    #     persist_directory=persitent_directory
+    # )
+    faiss_index = FAISS.from_documents(all_chunks, OpenAIEmbeddings())
+    #vectordb.persist()
 
 
 
 # %%
 def load_vector_store():
-    vectordb = Chroma(
-        persist_directory=persitent_directory,
-        embedding_function=OpenAIEmbeddings()
-    )
-    return vectordb
+    # vectordb = Chroma(
+    #     persist_directory=persitent_directory,
+    #     embedding_function=OpenAIEmbeddings()
+    # )
+    global faiss_index
+    return faiss_index
+    #return vectordb
 def get_qa_chain(vectordb):
     retriever=vectordb.as_retriever(search_kwargs={"k": 3})
     chain =RetrievalQA.from_chain_type(
